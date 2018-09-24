@@ -1,4 +1,4 @@
-package com.atlassian.jira.project.version
+package services
 
 import com.atlassian.jira.issue.ModifiedValue
 import com.atlassian.jira.issue.util.DefaultIssueChangeHolder
@@ -12,6 +12,7 @@ import com.atlassian.jira.issue.fields.CustomField;
 import com.atlassian.jira.issue.fields.config.FieldConfig;
 import com.atlassian.jira.issue.fields.config.FieldConfigScheme
 import com.atlassian.jira.project.Project
+import com.atlassian.jira.project.version.Version
 import org.apache.log4j.Logger
 import org.apache.log4j.Level
 

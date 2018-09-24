@@ -1,7 +1,14 @@
+package scriptListeners
+
+/**
+ * Created by michaelsh on 9/22/2018.
+ */
+
+
+
 /*
- * Created by Eyal.Goldenberg on 07/12/2017.
- * Update Event script
-*/
+
+
 
 import com.atlassian.jira.issue.util.IssueChangeHolder;
 import com.atlassian.crowd.embedded.api.Group
@@ -25,9 +32,21 @@ import com.atlassian.jira.issue.customfields.manager.*
 import com.atlassian.jira.ComponentManager
 import com.atlassian.jira.user.ApplicationUser
 import com.atlassian.jira.issue.MutableIssue
-//
-//
-Issue issue = event.issue
+
+
+
+Issue issue = event.issue as MutableIssue
+
+def changeHistoryManager = ComponentAccessor.getChangeHistoryManager()
+def changelog = event.getChangeLog()
+
+def componentFlag = event.getChangeLog().getRelated('ChildChangeItem').any{ it.field.toString().equalsIgnoreCase("Component")}
+def responsibleTeamFlag = event.getChangeLog().getRelated('ChildChangeItem').any{ it.field.toString().equalsIgnoreCase("Responsible Team")}
+log.error("component was changed in ${issue.key} ")
+log.error("componentFlag value is  : ${componentFlag}")
+log.error("responsibleTeamFlag  value is  : ${responsibleTeamFlag}")
+
+
 
 
 //MutableIssue issue = ComponentAccessor.getIssueManager().getIssueObject("ARM-1199")
@@ -38,9 +57,29 @@ def ticketStatus = issue.getStatusObject().getName();
 def user = ComponentAccessor.jiraAuthenticationContext.getLoggedInUser()
 //return ticketStatus
 
-def customFieldManager = ComponentAccessor.getCustomFieldManager()
+
+// Check if ticket status is QA or Waiting for
 def waitingfor = customFieldManager.getCustomFieldObjectByName("Waiting for")
 waitingfor = issue.getCustomFieldValue(waitingfor)
+def waitingforbol = false
+if(ticketStatus == "Waiting for" & (waitingfor == "Reproduce" || waitingfor == "QA Info")){
+    waitingforbol = true
+}
+
+if(ticketStatus == "QA" ||  waitingforbol ){
+    if(!responsibleTeamFlag){
+        //Set Responsible team
+    }
+
+}else if(componentFlag && ){
+
+}
+
+
+
+
+def RTEAM = ComponentAccessor.getCustomFieldManager (  ).getCustomFieldObjectByName ( "Responsible Team Report" )
+def customFieldManager = ComponentAccessor.getCustomFieldManager()
 
 //Multi component list - Start
 def getcomponentList = issue.getComponentObjects()
@@ -68,7 +107,7 @@ def flag = 1
 //Update Dev Responsible Team
 
 //Michael-disable if condition
-/*
+
 if (ticketStatus == "Reopened") {
     //ARM Project
     if (projectName == "ARM") {
@@ -107,7 +146,7 @@ if (ticketStatus == "Reopened") {
         }else if (componentValue == "IPP_Media-USB"){
             groupValue = "# IPP Media"
         }else if (componentValue == "IPP_HRS"){
-            groupValue = "# IPP Amir SW IL"
+            groupValue = "# IPP Oriel SW IL"
         }else if (componentValue == "IPP_Production"){
             groupValue = "# IPP Kenny SW SZ Infra"
         }else if (componentValue == "IPP_VOIP"){
@@ -167,7 +206,7 @@ if (ticketStatus == "Reopened") {
 }
 
 // Michael- end if condition
-*/
+
 
 def waitingforbol = false
 if(ticketStatus == "Waiting for" & (waitingfor == "Reproduce" || waitingfor == "QA Info")){
@@ -186,10 +225,12 @@ if (ticketStatus == "QA" || waitingforbol) {
     }else if (projectName == "IPP Generic SIP" || projectName == "IPP MS-UC" ){
         groupValue = "# IPP QA"
         log.debug("groupValue:"+groupValue + "Component value" + componentValue)
-    }else if (projectName == "OVOC" && componentValue == "IPP_MGMT") {
+    }else if (projectName == "OVOC" && componentValue == "IPP_MGMT"){
         groupValue = "# SW Applications QA"
     }else if (projectName == "OVOC") {
         groupValue = "# OVOC QA"
+    }else if(projectName == "IPP Manger Express") {
+        groupValue = "# SW Applications QA"
     }
     log.debug("groupValue:"+groupValue)
 
@@ -208,15 +249,12 @@ if (ticketStatus == "QA" || waitingforbol) {
     def userManager = ComponentAccessor.getUserManager() as UserManager
     ApplicationUser currentUser = userManager.getUserByName('JiraAutomation')
     issue.setCustomFieldValue(customFieldManager.getCustomFieldObject('customfield_10302'),groupList)
+    issue.setCustomFieldValue(customFieldManager.getCustomFieldObject('customfield_11100'),groupList[0].name)
+
     issueManager.updateIssue(currentUser, issue, EventDispatchOption.ISSUE_UPDATED, false);
-
+    RTEAM.updateValue(null, issue, new ModifiedValue(issue.getCustomFieldValue(RTEAM), groupList[0].name), changeHolder);
     cf.updateValue(null, issue, new ModifiedValue(issue.getCustomFieldValue(cf), groupList), changeHolder);
-
     issue.store()
-
-//def inputParameters = new IssueInputParametersImpl().setDescription("Responsible Team was change").addCustomFieldValue((customFieldManager.getCustomFieldObjectByName("Responsible Team").id), groupList[0].name)
-//def validationResult = issueService.validateUpdate(user, issue.id, inputParameters)
-//assert !validationResult.errorCollection.hasAnyErrors()
-//issueService.update(user, validationResult)
     issueIndexingService.reIndex ( issue as MutableIssue )
 }
+*/

@@ -1,3 +1,4 @@
+package console
 /**
  * Created by michaelsh on 9/20/2018.
  */
@@ -58,13 +59,11 @@ if (parseResult.isValid()) {
     searchResult.getIssues().each { documentIssue ->
         //log.debug(documentIssue.key)
 
-        // if you need a mutable issue you can do:
         def issue = issueManager.getIssueObject(documentIssue.id)
         def CustomersGroup = groupManager.getGroup("Customers")
         IssueChangeHolder changeHolder = new DefaultIssueChangeHolder()
         //Get Temp Customer field
         def tempCustomerField = customFieldManager.getCustomFieldObject("customfield_10907").getValue(issue) as String
-
         //Get Customer-Service cloud user picker
         def customerSc =customFieldManager.getCustomFieldObject("customfield_10900")
         //Remove special characters from tempCustomerField

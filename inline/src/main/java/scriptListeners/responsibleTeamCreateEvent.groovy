@@ -1,3 +1,4 @@
+package scriptListeners
 /**
  * Created by Eyal.Goldenberg on 07/12/2017.
  * Create Event Script
@@ -28,6 +29,7 @@ import com.atlassian.jira.issue.MutableIssue
 
 
 Issue issue = event.issue
+
 
 
 //MutableIssue issue = ComponentAccessor.getIssueManager().getIssueObject("ARM-1611")

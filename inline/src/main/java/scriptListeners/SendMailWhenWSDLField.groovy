@@ -1,5 +1,6 @@
-package com.atlassian.mail.server
+package scriptListeners
 import com.atlassian.jira.component.ComponentAccessor
+import com.atlassian.mail.server.SMTPMailServer
 import groovy.json.JsonSlurper
 import java.nio.charset.StandardCharsets
 import org.apache.log4j.Logger

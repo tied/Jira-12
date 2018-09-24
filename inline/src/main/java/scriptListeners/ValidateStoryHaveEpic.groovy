@@ -1,3 +1,4 @@
+package scriptListeners
 
 import com.atlassian.jira.component.ComponentAccessor
 import com.atlassian.crowd.embedded.api.User
