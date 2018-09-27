@@ -25,3 +25,5 @@ if(!(currentUser == "oracle_sc" || currentUser == "jenkins" || currentUser == "J
     else if (workflowDestination == 'Done' && issueType in (issueTypesArr) && resolution == 'Tested')
         fixInBuild.setRequired(true)
 }
+
+
