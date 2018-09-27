@@ -37,21 +37,15 @@ def changelog = event.getChangeLog()
 
 def componentFlag = event.getChangeLog().getRelated('ChildChangeItem').any{ it.field.toString().equalsIgnoreCase("Component")}
 def responsibleTeamFlag = event.getChangeLog().getRelated('ChildChangeItem').any{ it.field.toString().equalsIgnoreCase("Responsible Team")}
-log.error("component was changed in ${issue.key} ")
-log.error("componentFlag value is  : ${componentFlag}")
-log.error("responsibleTeamFlag  value is  : ${responsibleTeamFlag}")
+log.warn("component was changed in ${issue.key} | componentFlag value is  : ${componentFlag} | responsibleTeamFlag  value is  : ${responsibleTeamFlag}|")
+
 
 if(componentFlag && !responsibleTeamFlag){
-
-
     String projectName = issue.getProjectObject().name
-    String newIssueType = issue.getIssueType().name
-    def user = ComponentAccessor.jiraAuthenticationContext.getLoggedInUser()
     def customFieldManager = ComponentAccessor.getCustomFieldManager()
     IssueService issueService = ComponentAccessor.issueService
     def RTEAM = ComponentAccessor.getCustomFieldManager (  ).getCustomFieldObjectByName ( "Responsible Team Report" )
 
-    def ticketStatus = issue.getStatusObject().getName();
 
     def getcomponentList = issue.getComponentObjects()
     List temp = new ArrayList()
@@ -66,10 +60,6 @@ if(componentFlag && !responsibleTeamFlag){
     def issueIndexingService = ComponentAccessor.getComponent ( IssueIndexingService )
     def componentValue = issue.getComponentObjects().getAt(0)?.getName()
     def groupValue = null
-    def flag = 1
-
-
-
 
     log.debug("Issue Key:"+issue.getKey())
     if (projectName == "ARM") {
@@ -106,48 +96,31 @@ if(componentFlag && !responsibleTeamFlag){
         }
     }
 
-        //log.error("The group value is in the end of the if condition : ${groupValue}")
-
-
-    log.debug("Project:"+projectName)
-    log.debug("componentValue:"+componentValue)
-    log.debug("IssueKey:" + issue.getKey())
-    log.debug("Group:" + groupValue)
-
+    log.warn("IssueKey: ${issue.getKey()} | Project: ${projectName} |componentValue: ${componentValue} | Group:  ${groupValue}|")
 
 }
-
-
-
 def setResponsibleTeam(String groupValue){
     IssueChangeHolder changeHolder = new DefaultIssueChangeHolder()
     GroupManager groupManager = ComponentAccessor.getGroupManager()
     Group watcherGroup = groupManager.getGroup(groupValue as String)
     List<Group> groupList = new ArrayList<Group>()
     groupList.add(watcherGroup)
-
     def cf = customFieldManager.getCustomFieldObjects(issue).find {it.name == 'Responsible Team'}
-//return groupList.name
-//issue.setCustomFieldValue(cf, groupList)
+
     if(groupList != null){
         def missue = issue.getKey()
         def issueManager = ComponentAccessor.getIssueManager()
         def userManager = ComponentAccessor.getUserManager() as UserManager
         ApplicationUser currentUser = userManager.getUserByName('JiraAutomation')
-
         issue.setCustomFieldValue(customFieldManager.getCustomFieldObject('customfield_10302'),groupList)
         issue.setCustomFieldValue(customFieldManager.getCustomFieldObject('customfield_11400'),groupList[0].name)
-
         issueManager.updateIssue(currentUser, issue, EventDispatchOption.ISSUE_UPDATED, false);
-
-        //ApplicationUser currentUser = ComponentAccessor.getJiraAuthenticationContext().getLoggedInUser()
         RTEAM.updateValue(null, issue, new ModifiedValue(issue.getCustomFieldValue(RTEAM), groupList[0].name), changeHolder);
         cf.updateValue(null, issue, new ModifiedValue(issue.getCustomFieldValue(cf), groupList), changeHolder);
 
-        log.debug("Issue Key:"+issue.getKey())
-        log.debug("groupList:"+groupList.name)
+        log.warn("Issue Key:"+issue.getKey())
+        log.warn("groupList:"+groupList.name)
         issue.store()
-
         issueIndexingService.reIndex ( issue as MutableIssue )
     }
 }
