@@ -1,14 +1,19 @@
 package behivours
 
+
+
 /**
  * Created by michaelsh on 9/26/2018.
  */
 
+import com.atlassian.crowd.embedded.api.Group
+import com.atlassian.jira.component.ComponentAccessor
 
-//Should be updated by SW eng – Mandatory when moving to ReadyToSubmit or QA or when moving to Done as Tested
-
+def currnetUser =  ComponentAccessor.getJiraAuthenticationContext().getLoggedInUser().getUsername()
+def groupManager = ComponentAccessor.getGroupManager()
+def groupFlag = groupManager.isUserInGroup(currnetUser,'Application users')
 def causeOfBug = getFieldById(getFieldChanged())
-def currentAction = getActionName()
-def statuses = ['QA', 'ReadyToSubmit']
-if(currentAction in (statuses))
-    causeOfBug.setRequired(true)
+def DestinationStatus = getDestinationStepName()
+def statusesList = ['QA', 'Ready To Submit']
+if(DestinationStatus in (statusesList) && !groupFlag)
+    causeOfBug.setRequired(true)ired(true)
