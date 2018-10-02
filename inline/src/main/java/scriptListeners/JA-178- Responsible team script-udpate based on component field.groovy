@@ -35,6 +35,13 @@ def changeHistoryManager = ComponentAccessor.getChangeHistoryManager()
 def issue = event.getIssue() as MutableIssue
 def changelog = event.getChangeLog()
 
+
+// workflows check
+def workflow = ComponentAccessor.getWorkflowManager().getWorkflow(issue)
+def wfd = workflow.getDescriptor()
+def actionName = wfd.getAction(transientVars["actionId"] as int).getName()
+//////
+
 def componentFlag = event.getChangeLog().getRelated('ChildChangeItem').any{ it.field.toString().equalsIgnoreCase("Component")}
 def responsibleTeamFlag = event.getChangeLog().getRelated('ChildChangeItem').any{ it.field.toString().equalsIgnoreCase("Responsible Team")}
 log.warn("component was changed in ${issue.key} | componentFlag value is  : ${componentFlag} | responsibleTeamFlag  value is  : ${responsibleTeamFlag}|")
