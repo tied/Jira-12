@@ -39,9 +39,7 @@ Issue issue = event.issue as MutableIssue
 //MutableIssue issue = ComponentAccessor.getIssueManager().getIssueObject("ARM-1611")
 String projectName = issue.getProjectObject().name
 String newIssueType = issue.getIssueType().name
-def user = ComponentAccessor.jiraAuthenticationContext.getLoggedInUser()
 def customFieldManager = ComponentAccessor.getCustomFieldManager()
-IssueService issueService = ComponentAccessor.issueService
 def RTEAM = ComponentAccessor.getCustomFieldManager (  ).getCustomFieldObjectByName ( "Responsible Team Report" )
 
 def ticketStatus = issue.getStatusObject().getName();
@@ -65,9 +63,6 @@ def flag = 1
 //}
 //Multi component list - End
 
-//Update Dev Responsible Team
-//if (ticketStatus == "Open" || ticketStatus == "In Progress" || ticketStatus == "Reopened" ) {
-//ARM Project
 
 // if condition added bu Michael shechter on 23/07/18
 def issueType = issue.getIssueType().name
