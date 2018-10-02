@@ -287,7 +287,7 @@ if(groupList != null){
     ApplicationUser currentUser = userManager.getUserByName('JiraAutomation')
 
     issue.setCustomFieldValue(customFieldManager.getCustomFieldObject('customfield_10302'),groupList) // Responsible Team - Prod id
-    issue.setCustomFieldValue(customFieldManager.getCustomFieldObject('customfield_11100'),groupList[0].name) // Responsible Team Report - Prod id
+    issue.setCustomFieldValue(customFieldManager.getCustomFieldObject('customfield_11400'),groupList[0].name) // Responsible Team Report - Test id
 
     issueManager.updateIssue(currentUser, issue, EventDispatchOption.ISSUE_UPDATED, false);
 
