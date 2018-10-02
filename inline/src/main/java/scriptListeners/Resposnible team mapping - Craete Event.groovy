@@ -286,8 +286,8 @@ if(groupList != null){
     def userManager = ComponentAccessor.getUserManager() as UserManager
     ApplicationUser currentUser = userManager.getUserByName('JiraAutomation')
 
-    issue.setCustomFieldValue(customFieldManager.getCustomFieldObject('customfield_10302'),groupList)
-    issue.setCustomFieldValue(customFieldManager.getCustomFieldObject('customfield_11100'),groupList[0].name)
+    issue.setCustomFieldValue(customFieldManager.getCustomFieldObject('customfield_10302'),groupList) // Responsible Team - Prod id
+    issue.setCustomFieldValue(customFieldManager.getCustomFieldObject('customfield_11100'),groupList[0].name) // Responsible Team Report - Prod id
 
     issueManager.updateIssue(currentUser, issue, EventDispatchOption.ISSUE_UPDATED, false);
 
