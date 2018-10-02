@@ -58,11 +58,6 @@ def issueIndexingService = ComponentAccessor.getComponent ( IssueIndexingService
 def componentValue = issue.getComponentObjects().getAt(0)?.getName()
 def groupValue = null
 def flag = 1
-//if (listofComponenetName.contains("ARM_General")){
-//  groupValue = "jira-administrators"
-//}
-//Multi component list - End
-
 
 // if condition added bu Michael shechter on 23/07/18
 def issueType = issue.getIssueType().name
