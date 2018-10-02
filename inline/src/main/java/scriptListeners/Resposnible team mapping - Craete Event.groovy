@@ -1,10 +1,5 @@
 package scriptListeners
 
-/**
- * Created by michaelsh on 10/2/2018.
- */
-
-
 
 /**
  * Created by Eyal.Goldenberg on 07/12/2017.
@@ -231,7 +226,6 @@ def cf = customFieldManager.getCustomFieldObjects(issue).find {it.name == 'Respo
 //return groupList.name
 //issue.setCustomFieldValue(cf, groupList)
 if(groupList != null){
-    def missue = issue.getKey()
     def changeHistoryManager = ComponentAccessor.getChangeHistoryManager()
     def issueManager = ComponentAccessor.getIssueManager()
     def userManager = ComponentAccessor.getUserManager() as UserManager
