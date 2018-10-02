@@ -209,6 +209,57 @@ if (issueType == "Test" || issueType == "Sub-Test "){
             groupValue ="# IPP MGMT Dev"
         }
     }
+
+    //**new if statement by Michael Shechter-15/08/18**
+    if(projectName == "SBC"){
+        if(componentValue == "General"){
+            groupValue ="# SBC Infra"
+        }else if(componentValue == "Infra System"){
+            groupValue ="# SBC Infra System"
+        }else if(componentValue == "Infra Core"){
+            groupValue ="# SBC Infra Core"
+        }else if(componentValue == "Infra App"){
+            groupValue ="# SBC Infra App"
+        }else if (componentValue == "BSP"){
+            groupValue ="# SBC BSP"
+        }else if(componentValue == "Management"){
+            groupValue ="# SBC OAM"
+        }else if(componentValue == "SBC Networking"){
+            groupValue ="# SBC Networking"
+        }else if(componentValue =="HA"){
+            groupValue ="# SBC HA"
+        }else if(componentValue =="SIP"){
+            groupValue ="# SBC SIP"
+        }else if(componentValue =="SIP Infra"){
+            groupValue ="# SBC SIP Infra"
+        }else if(componentValue =="Media Engine"){
+            groupValue ="# SBC ME"
+        }else if(componentValue == "PSTN"){
+            groupValue ="# PSTN"
+        }else if(componentValue =="VoipLib"){
+            groupValue ="# VoipLib"
+        }else if(componentValue =="LDAP"){
+            groupValue ="# SBC LDAP"
+        }else if(componentValue =="Feature Key"){
+            groupValue ="# SBC BSP"
+        }else if(componentValue =="NGINX"){
+            groupValue ="# SBC SIP"
+        }else if(componentValue =="Stack Manager"){
+            groupValue ="# SBC SysEng"
+        }else if(componentValue =="Desktop Applications"){
+            groupValue ="# SBC SysEng"
+        }else if(componentValue =="Audiomatic"){
+            groupValue ="# QA Automation"
+        }else if(componentValue =="BatchRunner"){
+            groupValue ="# QA Automation"
+        }else if(componentValue =="WireShark"){
+            groupValue ="# SBC WireShark"
+        }else if(componentValue == "# Board ETAS"){
+            groupValue ="# Board ETAS"
+        }else if(componentValue =="ETAS"){
+            groupValue ="# SBC ETAS"
+        }
+    }
 }
 log.debug("Project:"+projectName)
 log.debug("componentValue:"+componentValue)
