@@ -6,6 +6,7 @@ package scriptListeners
  * Create Event Script
  */
 
+
 import com.atlassian.jira.issue.util.IssueChangeHolder;
 import com.atlassian.crowd.embedded.api.Group
 import com.atlassian.jira.security.groups.GroupManager
@@ -79,10 +80,7 @@ if (issueType == "Test" || issueType == "Sub-Test "){
 }else{
     if (projectName == "ARM") {
         if (componentValue == "ARM_Configurator") {
-            //return projectName
-            // --- CHANGE GROUP NAME !!!!
             groupValue = "# RnD ARM Configurator"
-            //  flag =2
         } else if (componentValue == "ARM_General") {
             groupValue = "# RnD ARM General"
         } else if (componentValue == "ARM_UI") {
@@ -209,7 +207,6 @@ if (issueType == "Test" || issueType == "Sub-Test "){
             groupValue ="# IPP MGMT Dev"
         }
     }
-
     //**new if statement by Michael Shechter-15/08/18**
     if(projectName == "SBC"){
         if(componentValue == "General"){
@@ -264,6 +261,8 @@ if (issueType == "Test" || issueType == "Sub-Test "){
     if(projectName == "MSBR"){
         groupValue == "MSBR"
     }
+
+
 }
 log.debug("Project:"+projectName)
 log.debug("componentValue:"+componentValue)
@@ -281,6 +280,7 @@ def cf = customFieldManager.getCustomFieldObjects(issue).find {it.name == 'Respo
 //return groupList.name
 //issue.setCustomFieldValue(cf, groupList)
 if(groupList != null){
+
     def changeHistoryManager = ComponentAccessor.getChangeHistoryManager()
     def issueManager = ComponentAccessor.getIssueManager()
     def userManager = ComponentAccessor.getUserManager() as UserManager
