@@ -260,6 +260,10 @@ if (issueType == "Test" || issueType == "Sub-Test "){
             groupValue ="# SBC ETAS"
         }
     }
+
+    if(projectName == "MSBR"){
+        groupValue == "MSBR"
+    }
 }
 log.debug("Project:"+projectName)
 log.debug("componentValue:"+componentValue)
