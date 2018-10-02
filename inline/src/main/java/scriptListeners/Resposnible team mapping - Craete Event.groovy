@@ -229,17 +229,8 @@ log.debug("Project:"+projectName)
 log.debug("componentValue:"+componentValue)
 log.debug("IssueKey:" + issue.getKey())
 log.debug("Group:" + groupValue)
-/*
-if (ticketStatus == "QA" || ticketStatus == "Waiting for QA" || ticketStatus == "Waiting for reproduce") {
-        if (projectName == "ARM") {
-            groupValue = "# ARM QA"
-        }else if (projectName == "SmartTAP") {
-            groupValue = "SmartTAP QA"
-        }else if (projectName == "IPP Generic SIP" || projectName == "IPP MS-UC" ){
-            groupValue = "IPP QA"
-        }
-    }
-*/
+
+
 IssueChangeHolder changeHolder = new DefaultIssueChangeHolder();
 GroupManager groupManager = ComponentAccessor.getGroupManager()
 Group watcherGroup = groupManager.getGroup(groupValue as String)
