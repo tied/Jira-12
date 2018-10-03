@@ -75,6 +75,22 @@ if (issueType == "Test" || issueType == "Sub-Test "){
         groupValue = "# OVOC QA"
     }else if(projectName == "IPP Manger Express") {
         groupValue = "# SW Applications QA"
+    }else if(projectName == "SBC"){
+        if(componentValue == "General" ||componentValue == "Infra System" ||componentValue == "Infra Core" || componentValue == "Infra App" ||componentValue == "BSP" || componentValue == "SBC Networking" ||componentValue == "Feature Key" ||componentValue == "Desktop Applications" ){
+            groupValue = "# QA Networking"
+        }else if(componentValue == "Audiomatic" || componentValue == "BatchRunner " ){
+            groupValue = "# QA Automation"
+        }else if(componentValue == "Media Engine"){
+            groupValue = "# QA Media Engine"
+        }else if(componentValue == "Management"){
+            groupValue == "# QA MGMT"
+        }else if(componentValue == "PSTN" || componentValue == "VoipLib" || componentValue == "WireShark"){
+            groupValue = "# QA PSTN"
+        }else if(componentValue == "SIP" || componentValue == "SIP Infra" || componentValue == "NGINX" || componentValue == "Stack Manager"){
+            groupValue = "# QA SIP"
+        }else if (componentValue == "HA" || componentValue == "LDAP"){
+            groupValue = "# QA Solution"
+        }
     }
     //log.error("The group value is in the end of the if condition : ${groupValue}")
 }else{
@@ -259,10 +275,8 @@ if (issueType == "Test" || issueType == "Sub-Test "){
     }
 
     if(projectName == "MSBR"){
-        groupValue == "MSBR"
+        groupValue == "# MSBR"
     }
-
-
 }
 log.debug("Project:"+projectName)
 log.debug("componentValue:"+componentValue)
