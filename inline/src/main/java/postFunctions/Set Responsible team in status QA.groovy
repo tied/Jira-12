@@ -17,6 +17,7 @@ import com.atlassian.jira.security.groups.GroupManager
 import com.atlassian.jira.component.ComponentAccessor
 import com.atlassian.jira.issue.index.IssueIndexManager
 import com.atlassian.jira.issue.Issue
+import com.atlassian.jira.user.ApplicationUser
 import org.apache.log4j.Logger
 import org.apache.log4j.Level
 import org.apache.log4j.Category
@@ -36,7 +37,7 @@ String newIssueType = issue.getIssueType().name
 def ticketStatus = issue.getStatusObject().getName();
 
 //return ticketStatus
-
+def RTEAM = ComponentAccessor.getCustomFieldManager (  ).getCustomFieldObjectByName ( "Responsible Team Report" )
 def customFieldManager = ComponentAccessor.getCustomFieldManager()
 def waitingfor = customFieldManager.getCustomFieldObjectByName("Waiting for")
 waitingfor = issue.getCustomFieldValue(waitingfor)
@@ -101,8 +102,19 @@ List<Group> groupList = new ArrayList<Group>()
 groupList.add(watcherGroup)
 
 def cf = customFieldManager.getCustomFieldObjects(issue).find {it.name == 'Responsible Team'}
+if(groupList != null){
 
-//issue.setCustomFieldValue(cf, groupList)
-cf.updateValue(null, issue, new ModifiedValue(issue.getCustomFieldValue(cf), groupList), changeHolder);
+    def changeHistoryManager = ComponentAccessor.getChangeHistoryManager()
+    def issueManager = ComponentAccessor.getIssueManager()
+    def userManager = ComponentAccessor.getUserManager() as UserManager
+    ApplicationUser currentUser = userManager.getUserByName('JiraAutomation')
+    ssue.setCustomFieldValue(customFieldManager.getCustomFieldObject('customfield_10302'),groupList) // Responsible Team - Prod id
+    issue.setCustomFieldValue(customFieldManager.getCustomFieldObject('customfield_11400'),groupList[0].name) // Responsible Team Report - Test id
+    RTEAM.updateValue(null, issue, new ModifiedValue(issue.getCustomFieldValue(RTEAM), groupList[0].name), changeHolder);
+    cf.updateValue(null, issue, new ModifiedValue(issue.getCustomFieldValue(cf), groupList), changeHolder);
+    issue.store()
 
-issue.store()
+}
+
+
+
