@@ -51,6 +51,7 @@ getcomponentList.each {
 }
 
 def issueIndexingService = ComponentAccessor.getComponent ( IssueIndexingService )
+def i
 def componentValue = issue.getComponentObjects().getAt(0)?.getName()
 def groupValue = null
 def flag = 1
@@ -90,6 +91,8 @@ if (issueType == "Test" || issueType == "Sub-Test "){
             groupValue = "# QA SIP"
         }else if (componentValue == "HA" || componentValue == "LDAP"){
             groupValue = "# QA Solution"
+        }else if(componentValue == "Cloud"){
+            groupValue = "# SBC SysEng"
         }
     }
     //log.error("The group value is in the end of the if condition : ${groupValue}")
@@ -186,7 +189,6 @@ if (issueType == "Test" || issueType == "Sub-Test "){
         } else if (componentValue == "IPP_Automation") {
             groupValue = "#IP Phone Automation"
         }
-
     }
 
     if(projectName == "IPP DVF101 Linux Kernel & BSP"){
@@ -271,6 +273,8 @@ if (issueType == "Test" || issueType == "Sub-Test "){
             groupValue ="# Board ETAS"
         }else if(componentValue =="ETAS"){
             groupValue ="# SBC ETAS"
+        }else if(componentValue == "Cloud"){
+            groupValue = "# SBC SysEng"
         }
     }
 
