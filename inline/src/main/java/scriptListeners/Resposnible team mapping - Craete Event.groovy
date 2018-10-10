@@ -92,7 +92,7 @@ if (issueType == "Test" || issueType == "Sub-Test "){
         }else if (componentValue == "HA" || componentValue == "LDAP"){
             groupValue = "# QA Solution"
         }else if(componentValue == "Cloud"){
-            groupValue = "# SBC SysEng"
+            groupValue = "# QA SIP"
         }
     }
     //log.error("The group value is in the end of the if condition : ${groupValue}")
