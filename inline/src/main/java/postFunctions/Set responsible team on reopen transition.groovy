@@ -67,10 +67,7 @@ def flag = 1
 //ARM Project
 if (projectName == "ARM") {
     if (componentValue == "ARM_Configurator") {
-        //return projectName
-        // --- CHANGE GROUP NAME !!!!
         groupValue = "# RnD ARM Configurator"
-        //  flag =2
     } else if (componentValue == "ARM_General") {
         groupValue = "# RnD ARM General"
     } else if (componentValue == "ARM_UI") {
@@ -122,6 +119,12 @@ else if (projectName == "IPP MS-UC"){
         groupValue = "CI_Technical_Writers"
     }else if (componentValue == "Connectivity"){
         groupValue = "# IPP Oleg SW IL"
+    }else if (componentValue == "IPP_DSP") {
+        groupValue = "# IPP DSP"
+    } else if (componentValue == "IPP_SPTF") {
+        groupValue = "# IPP Oleg SW IL"
+    } else if (componentValue == "IPP_Automation") {
+        groupValue = "#IP Phone Automation"
     }
 
 
