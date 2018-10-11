@@ -164,15 +164,34 @@ else if (projectName == "IPP MS-UC"){
     if (componentValue == "Bootastic" || componentValue == "Linux kernel" || componentValue == "U-boot") {
         groupValue = "# IPP RnD - DSPG"
     }
+}else if(projectName == "OVOC"){
+    if(componentValue == "ETAS"){
+        groupValue = "# OVOC Support"
+    }else if(componentValue == "OVOC_General"){
+        groupValue = "# OVOC"
+    }else if(componentValue == "OVOC_CLM"){
+        groupValue = "# # OVOC CLM"
+    }else if(componentValue =="OVOC_QOE_SBC" || componentValue == "OVOC_QOE_SFB" || componentValue == "OVOC_QOE_IPP"|| componentValue == "OVOC_Device_BackUp"|| componentValue == "OVOC_Operator"|| componentValue == "OVOC_Reports"|| componentValue == "OVOC_PM"){
+        groupValue ="# OVOC QOE"
+    }else if(componentValue =="OVOC_Topology"|| componentValue == "OVOC_Alarms"|| componentValue == "OVOC_OS_Infra"|| componentValue == "OVOC_License_Pool"){
+        groupValue ="# OVOC MGMT"
+    }else if(componentValue =="OVOC_UI" || componentValue == "OVOC_UI_Infra"){
+        groupValue ="# OVOC Web UI"
+    }else if(componentValue =="IPP_MGMT"){
+        groupValue ="# IPP MGMT Dev"
+    }else if(componentValue =="OVOC_REST"){
+        groupValue ="# OVOC"
+    }else if(componentValue =="OVOC_Server_Infra"){
+        groupValue ="# OVOC MGM"
+    }else if(componentValue =="OVOC_QA_Automation"){
+        groupValue ="# OVOC QA"
+    }
 
-}else if (projectName == "SBC GW and MSBR") {
-    if (componentValue == "SBC_SIP") {
-        groupValue = "test-sbc-sip"
-    } else if (componentValue == "SBC_Media") {
-        groupValue = "test-sbc-media"
+}else if(projectName == "IPP Manger Express"){
+    if(componentValue == "General"){
+        groupValue ="# IPP MGMT Dev"
     }
 }
-
 
 IssueChangeHolder changeHolder = new DefaultIssueChangeHolder();
 GroupManager groupManager = ComponentAccessor.getGroupManager()
