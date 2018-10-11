@@ -160,8 +160,12 @@ else if (projectName == "IPP MS-UC"){
         groupValue = "# IPP Oleg SW IL"
 
     }
-}
-else if (projectName == "SBC GW and MSBR") {
+}else if(projectName == "IPP DVF101 Linux Kernel & BSP") {
+    if (componentValue == "Bootastic" || componentValue == "Linux kernel" || componentValue == "U-boot") {
+        groupValue = "# IPP RnD - DSPG"
+    }
+
+}else if (projectName == "SBC GW and MSBR") {
     if (componentValue == "SBC_SIP") {
         groupValue = "test-sbc-sip"
     } else if (componentValue == "SBC_Media") {
