@@ -168,23 +168,7 @@ else if (projectName == "SBC GW and MSBR") {
         groupValue = "test-sbc-media"
     }
 }
-//}
-def waitingforbol = false
-if(ticketStatus == "Waiting for" & (waitingfor == "Reproduce" || waitingfor == "QA Info")){
-    waitingforbol = true
-}
 
-if (ticketStatus == "QA" || waitingforbol || ticketStatus == "Waiting for reproduce") {
-    if (projectName == "ARM") {
-        groupValue = "# ARM QA"
-    }else if (projectName == "SmartTAP") {
-        groupValue = "SmartTAP QA"
-    }else if (projectName == "IPP Generic SIP" || projectName == "IPP MS-UC" ){
-        groupValue = "# IPP QA"
-    }else if (projectName == "SBC GW and MSBR"){
-        groupValue = "test-sbc-qa"
-    }
-}
 
 IssueChangeHolder changeHolder = new DefaultIssueChangeHolder();
 GroupManager groupManager = ComponentAccessor.getGroupManager()
