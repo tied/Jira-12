@@ -241,6 +241,8 @@ else if (projectName == "IPP MS-UC"){
     }else if(componentValue == "Cloud"){
         groupValue = "# SBC SysEng"
     }
+}else if(projectName == "MSBR"){
+    groupValue == "# MSBR"
 }
 
 IssueChangeHolder changeHolder = new DefaultIssueChangeHolder();
